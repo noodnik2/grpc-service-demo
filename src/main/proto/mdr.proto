@@ -1,0 +1,26 @@
+//
+//  Title: Mdr Example API Protocol Buffer Definitions
+//  Author: Marty Ross
+//
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "mdr.grpc.mdrservice";
+option java_outer_classname = "MdrProto";
+
+package apiservice;
+
+//service definition
+service MdrService {
+  rpc UpdateApiStatus(ApiStatus) returns (Rc) {}
+}
+
+message ApiStatus {
+  string apiname = 1;
+  string status = 2;
+}
+
+message Rc {
+  int32 rc = 1;
+}
