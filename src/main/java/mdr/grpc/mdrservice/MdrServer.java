@@ -2,13 +2,13 @@ package mdr.grpc.mdrservice;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ *  Standard deployment of an "Mdr Service" instance
  *  @author Marty Ross
  */
 public class MdrServer {
@@ -26,21 +26,6 @@ public class MdrServer {
         final MdrServer server = new MdrServer();
         server.startService();
         server.blockUntilShutdown();
-    }
-
-
-    //
-    //  Private inner classes
-    //
-
-    private static class MdrServiceImpl extends MdrServiceGrpc.MdrServiceImplBase {
-        @Override
-        public void updateApiStatus(ApiStatus request, StreamObserver<Rc> responseObserver) {
-            LOGGER.info(String.format("updateApiStatus(%s, %s)", request.getApiname(), request.getStatus()));
-            responseObserver.onNext(Rc.newBuilder().setRc(99).build());
-            responseObserver.onCompleted();
-        }
-
     }
 
 

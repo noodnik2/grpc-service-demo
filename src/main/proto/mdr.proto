@@ -17,7 +17,7 @@ service MdrService {
 }
 
 message ApiStatus {
-  string apiname = 1;
+  string method = 1;
   string status = 2;
 }
 

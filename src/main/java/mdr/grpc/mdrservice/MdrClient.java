@@ -59,9 +59,9 @@ public class MdrClient {
   /**apiservice
    *
    */
-  public void udpateApiStatus(final String inApiName, final String inApiStatus) {
+  public void udpateApiStatus(final String inMethod, final String inApiStatus) {
     logger.info("call updateApiStatus()");
-    final ApiStatus request = ApiStatus.newBuilder().setApiname(inApiName).setStatus(inApiStatus).build();
+    final ApiStatus request = ApiStatus.newBuilder().setMethod(inMethod).setStatus(inApiStatus).build();
     Rc rc = _blockingStub.updateApiStatus(request);
     logger.info(String.format("rc(%s)", rc.getRc()));
   }

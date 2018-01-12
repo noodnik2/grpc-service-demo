@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         // ASSUMES GRADLE 2.12 OR HIGHER. Use plugin version 0.7.5 with earlier
         // gradle versions
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.0'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.3'
     }
 }
 
@@ -20,14 +20,20 @@ repositories {
     mavenLocal()
 }
 
-def grpcVersion = '1.0.0' // CURRENT_GRPC_VERSION
+def grpcVersion = '1.9.0' // CURRENT_GRPC_VERSION
 
 dependencies {
+
     compile "io.grpc:grpc-netty:${grpcVersion}"
     compile "io.grpc:grpc-protobuf:${grpcVersion}"
     compile "io.grpc:grpc-stub:${grpcVersion}"
+    compile "io.grpc:grpc-core:${grpcVersion}"
 
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "io.grpc:grpc-testing:${grpcVersion}"
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile "org.jetbrains:annotations-java5:15.0"
+
 }
 
 protobuf {
@@ -35,7 +41,7 @@ protobuf {
         // The version of protoc must match protobuf-java. If you don't depend on
         // protobuf-java directly, you will be transitively depending on the
         // protobuf-java version that grpc depends on.
-        artifact = 'com.google.protobuf:protoc:3.0.0'
+        artifact = 'com.google.protobuf:protoc:3.5.1-1'
     }
     plugins {
         grpc {
@@ -66,4 +72,8 @@ idea {
         //generatedSourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc")
 
     }
+}
+
+javadoc {
+    exclude 'io/grpc/internal/**'
 }
