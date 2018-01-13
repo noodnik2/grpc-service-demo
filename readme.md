@@ -1,0 +1,1 @@
+This is my project to create a minimal client-server usage of gRPC.
