@@ -13,14 +13,15 @@ package apiservice;
 
 //service definition
 service MdrService {
-  rpc UpdateApiStatus(ApiStatus) returns (Rc) {}
+    rpc UpdateApiStatus(ApiStatus) returns (Rc) {}
 }
 
 message ApiStatus {
-  string method = 1;
-  string status = 2;
+    string method = 1;
+    string status = 2;
 }
 
 message Rc {
-  int32 rc = 1;
+    int32 rc = 1;
 }
+

@@ -16,69 +16,71 @@ public class MdrClient {
   //  Public class methods
   //
 
-  public static void main(String[] args) throws InterruptedException{
-    final MdrClient client = new MdrClient("localhost", 50051);
-    try {
-      client.udpateApiStatus("api2", "unstable");
-    } finally {
-      client.shutdown();
+    public static void main(String[] args) throws InterruptedException {
+        final MdrClient client = new MdrClient("localhost", 50051);
+        try {
+            client.udpateApiStatus("api2", "unstable");
+        } finally {
+            client.shutdown();
+        }
     }
-  }
 
 
-  //
-  //  Public instance construction
-  //
+    //
+    //  Public instance construction
+    //
 
-  /**
-   *  @param inHost host
-   *  @param inPort port
-   */
-  public MdrClient(final String inHost, final int inPort) {
-    // Channels are secure by default (via SSL/TLS).
-    // For the example we disable TLS to avoid needing certificates.
-    _channel = ManagedChannelBuilder
-        .forAddress(inHost, inPort)
-        .usePlaintext(true)
-        .build();
-    _blockingStub = MdrServiceGrpc.newBlockingStub(_channel);
-  }
-
-
-  //
-  //  Public instance methods
-  //
-
-  /**
-   *  @throws InterruptedException unhandled exception
-   */
-  public void shutdown() throws InterruptedException {
-    _channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
-  }
-
-  /**apiservice
-   *
-   */
-  public void udpateApiStatus(final String inMethod, final String inApiStatus) {
-    logger.info("call updateApiStatus()");
-    final ApiStatus request = ApiStatus.newBuilder().setMethod(inMethod).setStatus(inApiStatus).build();
-    Rc rc = _blockingStub.updateApiStatus(request);
-    logger.info(String.format("rc(%s)", rc.getRc()));
-  }
+    /**
+    *  @param inHost host
+    *  @param inPort port
+    */
+    public MdrClient(final String inHost, final int inPort) {
+        // Channels are secure by default (via SSL/TLS).
+        // For the example we disable TLS to avoid needing certificates.
+        _channel = (
+            ManagedChannelBuilder
+            .forAddress(inHost, inPort)
+            .usePlaintext(true)
+            .build()
+        );
+        _blockingStub = MdrServiceGrpc.newBlockingStub(_channel);
+    }
 
 
-  //
-  //  Private class data
-  //
+    //
+    //  Public instance methods
+    //
 
-  private static final Logger logger = Logger.getLogger(MdrClient.class.getName());
+    /**
+    *  @throws InterruptedException unhandled exception
+    */
+    public void shutdown() throws InterruptedException {
+        _channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+    }
+
+    /**apiservice
+    *
+    */
+    public void udpateApiStatus(final String inMethod, final String inApiStatus) {
+        logger.info("call updateApiStatus()");
+        final ApiStatus request = ApiStatus.newBuilder().setMethod(inMethod).setStatus(inApiStatus).build();
+        Rc rc = _blockingStub.updateApiStatus(request);
+        logger.info(String.format("rc(%s)", rc.getRc()));
+    }
 
 
-  //
-  //  Private instance data
-  //
+    //
+    //  Private class data
+    //
 
-  private final ManagedChannel _channel;
-  private final MdrServiceGrpc.MdrServiceBlockingStub _blockingStub;
+    private static final Logger logger = Logger.getLogger(MdrClient.class.getName());
+
+
+    //
+    //  Private instance data
+    //
+
+    private final ManagedChannel _channel;
+    private final MdrServiceGrpc.MdrServiceBlockingStub _blockingStub;
 
 }
