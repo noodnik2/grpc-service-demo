@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/grpc-service-demo.iml" filepath="$PROJECT_DIR$/.idea/modules/grpc-service-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jserv.iml" filepath="$PROJECT_DIR$/.idea/modules/jserv.iml" group="jserv" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jserv/jserv_main.iml" filepath="$PROJECT_DIR$/.idea/modules/jserv/jserv_main.iml" group="jserv" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jserv/jserv_test.iml" filepath="$PROJECT_DIR$/.idea/modules/jserv/jserv_test.iml" group="jserv" />
+    </modules>
+  </component>
+</project>
